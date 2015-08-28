@@ -1,6 +1,26 @@
 <html>
+
   <link href="index.css" rel="stylesheet">
+
+  <script>
+  	window.onload = function(){
+    	var scene = document.getElementById('scene');
+    	var parallax = new Parallax(scene,{originY: 0.9, limitY: 40});
+    }
+	</script>
   <body>
-    <h1> Hello World! </h1>
+    <div id="scene">
+      <canvas id='cm' class="layer" data-depth="0.20">No Canvas Suppot :- /</canvas>
+      <canvas id='ct' class="layer" data-depth="0.40">ss</canvas>
+      <canvas id='cr' class="layer" data-depth="0.60">ccc</canvas>
+      <canvas id='cn' class="layer" data-depth="0.80">vvvv</canvas>
+    </div>
+    <div id="info">
+      
+    </div>
   </body>
+
+  <!-- Has to be included after... -->
+  <script src="parallax.js"></script>
+  <script src="draw.js"></script>
 </html>

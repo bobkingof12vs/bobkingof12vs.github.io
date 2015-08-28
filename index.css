@@ -1,4 +1,30 @@
-h1{
-  text-decoration: underline;
-  color: #1b6f21;
+body{
+  background: linear-gradient(to top, #639ec9, #9bc5e4);
+}
+
+#scene{
+  position: fixed;
+  left: -50%;
+  top: 0px;
+  bottom: -10%;
+  right: -50%;
+}
+
+.layer{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+#info{
+  position: absolute;
+  border: 2px solid white;
+  border-radius: 10px;
+  top: 35px;
+  left: 35px;
+  right: 35px;
+  bottom: 350px;
+  background-color: rgba(255,255,255,.5);
 }
