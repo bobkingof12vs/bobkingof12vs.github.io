@@ -33,16 +33,17 @@ draw = new (function(){
   this.init['mountain'] = function(){
     var w = 2 * window.innerWidth;
     _this.minc = 150;
-    for(var i = -_this.minc; i <= w + (4*_this.minc); i += (2*_this.minc)){
+    for(var i = -50 - (2 * _this.minc); i <= w + (4*_this.minc) -50 - (2 * _this.minc); i += (2*_this.minc)){
       _this.mountain.push([i,(Math.random() * 50) + 180]);
       _this.mountain.push([i + _this.minc,(Math.random() * 50) - 50]);
     }
+
   };
   _this.treesFar = []
   this.init['trees'] = function(){
+    _this.farTree = _this.tree( 100, 100, 3, 30);
     for(var i = -350; i < (window.innerWidth + 350); i += 50){
       _this.treesFar.push({
-        tree: _this.tree( 100, 100, 3, 30),
         x: i + (Math.random() * 15) - 30,
         y: (Math.random() * 20)
       });
@@ -69,9 +70,9 @@ draw = new (function(){
 
   _this.treesNear = []
   this.init['near'] = function(){
+    _this.nearTree = _this.tree( 150, 150, 5, 50);
     for(var i = -400; i < (window.innerWidth + 400); i += 80){
       _this.treesNear.push({
-        tree: _this.tree( 150, 150, 5, 50),
         x: i + (Math.random() * 30) - 50,
         y: (Math.random() * 20)
       });
@@ -264,7 +265,7 @@ draw = new (function(){
     for(var i = 0; i < _this.mountain.length; i++)
       _this.mountain[i][0] -= speed;
 
-    if(_this.mountain[0][0] < -50 - (2 * _this.minc)){
+    if(_this.mountain[0][0] < -50 - (2 * _this.minc) || _this.mc === undefined){
       console.log('poke');
       _this.mountain.shift();
       _this.mountain.shift();
@@ -272,34 +273,41 @@ draw = new (function(){
       _this.mountain.push([x + _this.minc,      (Math.random() * 20) + 150]);
       _this.mountain.push([x + (2 * _this.minc),(Math.random() * 50)]);
       console.log(x,x+_this.minc,x + (2 * _this.minc))
+
+    	_this.mc = document.createElement('canvas');
+    	_this.mc.height = _this.wh,
+    	_this.mc.width = 2 * _this.ww,_this.wh;
+    	var context = _this.mc.getContext("2d");
+
+    	context.lineWidth = 4;
+    	context.strokeStyle = '#222';
+    	context.fillStyle = 'rgb(86, 129, 68)';
+
+      context.beginPath();
+      context.moveTo(-10, _this.wh + 10);
+      context.lineTo[_this.mountain[0],_this.wh - _this.mountain[1]]
+
+      for(var i = 0; i < _this.mountain.length - 2; i += 2)
+        context.bezierCurveTo(
+          _this.mountain[i][0],  _this.wh - 380 + _this.mountain[i][1],
+          _this.mountain[i+1][0],_this.wh - 380 + _this.mountain[i+1][1],
+          _this.mountain[i+2][0],_this.wh - 380 + _this.mountain[i+2][1]
+      )
+
+      context.lineTo(_this.ww*2+10, _this.wh + 10);
+      context.closePath();
+
+      context.shadowColor = '#222';
+      context.shadowBlur = 20;
+      context.shadowOffsetX = 2;
+      context.shadowOffsetY = 5;
+
+      context.stroke();
+      context.fill();
+
     }
 
-  	context.lineWidth = 4;
-  	context.strokeStyle = '#222';
-  	context.fillStyle = 'rgb(86, 129, 68)';
-
-    context.beginPath();
-    context.moveTo(-10, _this.wh + 10);
-    context.lineTo[_this.mountain[0],_this.wh - _this.mountain[1]]
-
-    for(var i = 0; i < _this.mountain.length - 2; i += 2)
-      context.bezierCurveTo(
-        _this.mountain[i][0],  _this.wh - 380 + _this.mountain[i][1],
-        _this.mountain[i+1][0],_this.wh - 380 + _this.mountain[i+1][1],
-        _this.mountain[i+2][0],_this.wh - 380 + _this.mountain[i+2][1]
-    )
-
-    context.lineTo(_this.ww*2+10, _this.wh + 10);
-    context.closePath();
-
-    context.shadowColor = '#222';
-    context.shadowBlur = 20;
-    context.shadowOffsetX = 2;
-    context.shadowOffsetY = 5;
-
-    context.stroke();
-    context.fill();
-
+    _this.ctx['mountain'].drawImage(_this.mc, _this.mountain[0][0], 0);
 
   }
   this.draw['trees'] = function(speed){
@@ -313,7 +321,7 @@ draw = new (function(){
         _this.treesFar[i].x = _this.ww + 350;
 
       _this.ctx['trees'].drawImage(
-        _this.treesFar[i].tree,
+        _this.farTree,
         _this.ww / 2 +  _this.treesFar[i].x,
         _this.wh - 190 - _this.treesFar[i].y
       );
@@ -339,7 +347,7 @@ draw = new (function(){
         _this.treesNear[i].x = _this.ww + 400;
 
       _this.ctx['near'].drawImage(
-        _this.treesNear[i].tree,
+        _this.nearTree,
         _this.ww / 2 +  _this.treesNear[i].x,
         _this.wh - 170 - _this.treesNear[i].y
       );
@@ -356,6 +364,7 @@ draw = new (function(){
     _this.draw['trees'](2);
     _this.draw['rails'](2.5);
     _this.draw['near'](3);
+    //setTimeout(_this.frame, 1000/18);
     requestAnimationFrame(_this.frame)
   };
 
