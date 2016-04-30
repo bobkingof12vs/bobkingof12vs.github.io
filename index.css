@@ -1,5 +1,6 @@
 body{
   background: linear-gradient(to top, #639ec9, #9bc5e4);
+  font-family: Tahoma, Geneva, sans-serif;
 }
 
 #scene{
@@ -39,4 +40,22 @@ body{
   float: left;
   padding-left: 5%;
   padding-right: 5%;
+}
+
+a{
+  color: white;
+  background-color: #3072b3;
+  border-radius: 4px;
+  padding: 3px;
+  text-decoration: none;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #599bdc), color-stop(100%, #3072b3));
+  background-image: -webkit-linear-gradient(top, #599bdc 0, #3072b3 100%);
+  background-image: -moz-linear-gradient(top, #599bdc 0, #3072b3 100%);
+  background-image: -ms-linear-gradient(top, #599bdc 0, #3072b3 100%);
+  background-image: -o-linear-gradient(top, #599bdc 0, #3072b3 100%);
+  background-image: linear-gradient(top, #599bdc 0, #3072b3 100%);
+  border: 1px solid #2967a4;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+  font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 }

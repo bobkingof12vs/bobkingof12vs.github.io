@@ -366,14 +366,15 @@ draw = new (function(){
   this.delay = new Date();
   _this.frame = function(){
     var nextDelay = new Date();
-    var diff = (nextDelay.getTime() - this.delay.getTime()) * 1000;
-    this.delay = nextDelay;
-    _this.draw['mountain'](1 * diff);
-    _this.draw['trees'](2 * diff);
-    _this.draw['rails'](2.5 * diff);
-    _this.draw['near'](3 * diff);
-    //setTimeout(_this.frame, 1000/18);
-    requestAnimationFrame(_this.frame)
+    var diff = 1 + (nextDelay.getTime() - _this.delay.getTime())/24000;
+    console.log(diff);
+    _this.delay = nextDelay;
+    setTimeout(_this.draw['mountain'](1 * diff),0);
+    setTimeout(_this.draw['trees'](2 * diff),0);
+    setTimeout(_this.draw['rails'](2.5 * diff),0);
+    setTimeout(_this.draw['near'](3 * diff),0);
+    setTimeout(_this.frame, 1000/24);
+    //requestAnimationFrame(_this.frame)
   };
 
 })();
