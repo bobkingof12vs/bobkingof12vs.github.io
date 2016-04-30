@@ -258,6 +258,7 @@ draw = new (function(){
   }
 
   this.draw = [];
+  _this.mountainResized = false;
   this.draw['mountain'] = function(speed){
     context = _this.ctx['mountain'];
     context.clearRect(0,0,2 * _this.ww,_this.wh);
@@ -265,18 +266,21 @@ draw = new (function(){
     for(var i = 0; i < _this.mountain.length; i++)
       _this.mountain[i][0] -= speed;
 
-    if(_this.mountain[0][0] < -50 - (2 * _this.minc) || _this.mc === undefined){
-      console.log('poke');
-      _this.mountain.shift();
-      _this.mountain.shift();
-      var x = _this.mountain[_this.mountain.length - 1][0];
-      _this.mountain.push([x + _this.minc,      (Math.random() * 20) + 150]);
-      _this.mountain.push([x + (2 * _this.minc),(Math.random() * 50)]);
-      console.log(x,x+_this.minc,x + (2 * _this.minc))
+    if(_this.mountain[0][0] < -50 - (2 * _this.minc) || _this.mc === undefined || _this.mountainResized){
+      if(!_this.mountainResized || _this.mountain[0][0] < -50 - (2 * _this.minc) || _this.mc === undefined){
+        console.log('poke');
+        _this.mountain.shift();
+        _this.mountain.shift();
+        var x = _this.mountain[_this.mountain.length - 1][0];
+        _this.mountain.push([x + _this.minc,      (Math.random() * 20) + 150]);
+        _this.mountain.push([x + (2 * _this.minc),(Math.random() * 50)]);
+        console.log(x,x+_this.minc,x + (2 * _this.minc))
+      }
+      _this.mountainResized = false;
 
     	_this.mc = document.createElement('canvas');
-    	_this.mc.height = _this.wh,
-    	_this.mc.width = 2 * _this.ww,_this.wh;
+    	_this.mc.height = _this.wh;
+    	_this.mc.width = 2 * _this.ww;
     	var context = _this.mc.getContext("2d");
 
     	context.lineWidth = 4;
@@ -359,11 +363,15 @@ draw = new (function(){
   this.init['rails']();
   this.init['near']();
 
+  this.delay = new Date();
   _this.frame = function(){
-    _this.draw['mountain'](1);
-    _this.draw['trees'](2);
-    _this.draw['rails'](2.5);
-    _this.draw['near'](3);
+    var nextDelay = new Date();
+    var diff = (nextDelay.getTime() - this.delay.getTime()) * 1000;
+    this.delay = nextDelay;
+    _this.draw['mountain'](1 * diff);
+    _this.draw['trees'](2 * diff);
+    _this.draw['rails'](2.5 * diff);
+    _this.draw['near'](3 * diff);
     //setTimeout(_this.frame, 1000/18);
     requestAnimationFrame(_this.frame)
   };
@@ -372,3 +380,21 @@ draw = new (function(){
 
 setTimeout(draw.frame,100);
 //console.log(draw.points['mountain']());
+
+window.addEventListener('resize',function(){
+  console.log('here')
+  draw.wh = window.innerHeight;
+  draw.ww = window.innerWidth;
+
+  for(var i in draw.ctx){
+    draw.ctx[i].width = 2 * window.innerWidth;
+    draw.ctx[i].height = window.innerHeight+50;
+    draw.c[i].width = 2 * window.innerWidth;
+    draw.c[i].height = window.innerHeight+50;
+    draw.c[i].style.width = (2 * window.innerWidth) +'px';
+    draw.c[i].style.height = (window.innerHeight+50)+'px';
+  }
+
+  draw.mountainResized = true;
+
+});

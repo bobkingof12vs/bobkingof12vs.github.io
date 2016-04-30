@@ -1,13 +1,5 @@
 <html>
-
   <link href="index.css" rel="stylesheet">
-
-  <script>
-  	window.onload = function(){
-    	var scene = document.getElementById('scene');
-    	var parallax = new Parallax(scene,{originY: 0.9, limitY: 40});
-    }
-	</script>
   <body>
     <div id="scene">
       <canvas id='cm' class="layer" data-depth="0.20">No Canvas Suppot :- /</canvas>
@@ -15,43 +7,59 @@
       <canvas id='cr' class="layer" data-depth="0.60">ccc</canvas>
       <canvas id='cn' class="layer" data-depth="0.80">vvvv</canvas>
     </div>
-    <div id="info">
-      <div id='job'>
-        <h2> Data Specialist for PV Schools</h2>
+    <div id='info'>
+      <h1 id='name'> Jacob Chisholm </h1>
+      <div id='col1'>
+
+        <h2> Why Programming? </h2>
         <p>
-          We manage 34,000 students in this school district. My job is make sure that
-          teachers and other inhouse staff have the resources they need to facilitate
-          students learning. This involves maintaining a number of php scripts that
-          send data to third parties, managing web pages for teachers and staff, and
-          creating sql queries that simplify state reporting procedures
+          It's not programming that I love, it is the opportunity to solve problems
+          and grow myself that I love. Programming is simply the wonderfully creative
+          outlet for this.
+        </p>
+
+        <h2> My Current Position </h2>
+        <p>
+          <h3> Data Specialist II for PVSchools </h3>
+          This job has required me to develope code in PHP, MSSQL, MySQL, Javascript and HTML/CSS all in an effort to maintain a database of 34,000 active students and 4,000 employees
+        </p>
+
+        <h2> Professional Highlights </h2>
+        <p>
+          <ul>
+            <li>Optimized a weekend long process to run in just half an hour. It now does twice the work as well!</li>
+            <li>Worked with a thrid party to relieve a half an hour of work daily from over 50 employees by automating the attendance calls.</li>
+            <li>Created a query that enables us to audit our data against the state's records.</li>
+          </ul>
         </p>
       </div>
-      <div id='lang'>
-        <h2> Profficient Languages: </h2>
+      <div id='col2'>
+        <h2> Languages I Work With </h2>
         <ul>
           <li>PHP</li>
           <li>MSSQL/MySQL</li>
           <li>Javascript</li>
           <li>HTML/CSS</li>
         </ul>
-      </div>
-      <div id='projs'>
-        <h2> Side Projects: </h2>
-        <h3> Shortline: Train Simulator </h3>
+        <h2> What I am Learning </h2>
         <ul>
-          <li>Working Demo</li>
-          <li>On Github </li>
+          <li>Three.js</li>
+          <li>Arduino(C++)</li>
         </ul>
-        <h3> Humble Data: Parish Family Management </h3>
+        <h2> Personal Projects - Shortline </h2>
+        This is a simple javascript game that allows you to mold a world,
+        lay track, place buildings, and run your trains.
+        <br><br>A simple app currently, but big plans for the future!
+        <h3>Check it out</h3>
         <ul>
-          <li>Working Demo</li>
-          <li>On Github </li>
+          <li><a href="">Load a Save</a></li>
+          <li><a href="">Start Cleanly</a></li>
+          <li><a href="">View On Github</a></li>
         </ul>
       </div>
 
   </body>
 
   <!-- Has to be included after... -->
-  <!--<script src="parallax.js"></script> -->
   <script src="draw.js"></script>
 </html>
